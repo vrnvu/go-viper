@@ -1,0 +1,8 @@
+service:
+  name: service-name
+  enabled: true
+  number: 10
+  list:
+    - a
+    - b
+    - c
