@@ -10,17 +10,17 @@ import (
 var configPath = "../../configs/"
 
 func TestConfigPath(t *testing.T) {
-	v := newViper(configPath, "full", "yaml")
-	readInConfig(v)
+	v := NewViper(configPath, "full", "yaml")
+	ReadInConfig(v)
 	assert.Equal(t, "service-name", v.GetString("service.name"))
 }
 
 func TestFull(t *testing.T) {
-	v := newViper(configPath, "full", "yaml")
-	readInConfig(v)
+	v := NewViper(configPath, "full", "yaml")
+	ReadInConfig(v)
 
 	var c models.ConfigViper
-	unmarshall(v, &c)
+	Unmarshall(v, &c)
 
 	assert.Equal(t, "service-name", c.Service.Name)
 	assert.Equal(t, true, c.Service.Enabled)
@@ -29,11 +29,11 @@ func TestFull(t *testing.T) {
 }
 
 func TestPartialUsesDefaults(t *testing.T) {
-	v := newViper(configPath, "partial", "yaml")
-	readInConfig(v)
+	v := NewViper(configPath, "partial", "yaml")
+	ReadInConfig(v)
 
 	var c models.ConfigViper
-	unmarshall(v, &c)
+	Unmarshall(v, &c)
 
 	assert.Equal(t, "", c.Service.Name)
 	assert.Equal(t, false, c.Service.Enabled)
@@ -42,11 +42,11 @@ func TestPartialUsesDefaults(t *testing.T) {
 }
 
 func TestAppendToNilList(t *testing.T) {
-	v := newViper(configPath, "partial", "yaml")
-	readInConfig(v)
+	v := NewViper(configPath, "partial", "yaml")
+	ReadInConfig(v)
 
 	var c models.ConfigViper
-	unmarshall(v, &c)
+	Unmarshall(v, &c)
 
 	assert.Equal(t, []string(nil), c.Service.List)
 	c.Service.List = append(c.Service.List, "a")
@@ -54,11 +54,11 @@ func TestAppendToNilList(t *testing.T) {
 }
 
 func TestEmptyConfig(t *testing.T) {
-	v := newViper(configPath, "empty", "yaml")
-	readInConfig(v)
+	v := NewViper(configPath, "empty", "yaml")
+	ReadInConfig(v)
 
 	var c models.ConfigViper
-	unmarshall(v, &c)
+	Unmarshall(v, &c)
 
 	assert.Equal(t, "", c.Service.Name)
 	assert.Equal(t, false, c.Service.Enabled)

@@ -1,7 +1,7 @@
 service:
   name: service-name
   enabled: true
-  number: 10
+  number: 25
   list:
     - a
     - b
