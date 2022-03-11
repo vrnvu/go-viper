@@ -8,7 +8,7 @@ import (
 
 var validate *validator.Validate = validator.New()
 
-func newViper(configPath, configName, configType string) *viper.Viper {
+func NewViper(configPath, configName, configType string) *viper.Viper {
 	v := viper.New()
 	v.AddConfigPath(configPath)
 	v.SetConfigName(configName)
@@ -16,13 +16,13 @@ func newViper(configPath, configName, configType string) *viper.Viper {
 	return v
 }
 
-func readInConfig(v *viper.Viper) {
+func ReadInConfig(v *viper.Viper) {
 	if err := v.ReadInConfig(); err != nil {
 		panic(err)
 	}
 }
 
-func unmarshall(v *viper.Viper, c *models.ValidConfigViper) error {
+func Unmarshall(v *viper.Viper, c *models.ValidConfigViper) error {
 	if err := v.Unmarshal(&c); err != nil {
 		panic(err)
 	}
